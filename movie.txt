@@ -20,3 +20,24 @@ insert into MOVIES values("M10","Psycho",1960,"English","D01"),("M11","Tomorrowc
 insert into MOVIE_CAST values("A101","M11","M_lead"),("A104","M11","F_lead"),("A101","M12","M_lead"),("A106","M10","Negative"),("A107","M13","M_lead"),("A104","M14","F_lead"),("A107","M14","Support");
 
 insert into RATING values("R1","M11",4),("R2","M10",4),("R3","M11",3),("R4","M12",4),("R5","M13",4),("R6","M15",3),("R7","M13",3);
+
+
+1}
+
+select Mov_title from MOVIES m, DIRECTOR d where m.Dir_id=d.Dir_id and  d.Dir_name='Hitchcock';
+
+2}
+
+select distinct Mov_title from MOVIES m,MOVIE_CAST mc where m.Mov_id=mc.Mov_id and (select count(Mov_id) from MOVIE_CAST where Act_id=mc.Act_id)>=2;
+
+3}
+
+select Act_name from ACTOR a join MOVIE_CAST mc on a.Act_id=mc.Act_id join MOVIES m on mc.Mov_id=m.Mov_id where m.Mov_year<2000 Intersect select Act_name from ACTOR a join MOVIE_CAST mc on a.Act_id=mc.Act_id join MOVIES m on mc.Mov_id=m.Mov_id where m.Mov_year>2015;
+
+4}
+
+select Mov_title,max(Rev_stars) from MOVIES m,RATING r where m.Mov_id=r.Mov_id group by(m.Mov_title,m.Mov_id) order by m.Mov_title;
+
+5}
+
+update rating set Rev_stars=5 where Mov_id in(select m.Mov_id from MOVIES m,DIRECTOR d where m.Dir_id=d,Dir_id and d.Dir_name='Steven Spielberg');
