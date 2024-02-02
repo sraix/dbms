@@ -5,11 +5,11 @@ create table ACTOR(Act_id varchar(10),Act_name varchar(20),Act_gender char(1),pr
 
 create table DIRECTOR(Dir_id varchar(10),Dir_name varchar(20),Dir_phone bigint,primary key(Dir_id));
 
-create table MOVIES(Mov_id varchar(10),Mov_title varchar(40),Mov_year int,Mov_lang char(10),Dir_id varchar(10),primary key(Mov_id),foreign key(Dir_id) references DIRECTOR(Dir_id));
+create table MOVIES(Mov_id varchar(10),Mov_title varchar(40),Mov_year int,Mov_lang char(10),Dir_id varchar(10),primary key(Mov_id),foreign key(Dir_id) references DIRECTOR(Dir_id) on delete cascade);
 
-create table MOVIE_CAST(Act_id varchar(10),Mov_id varchar(10),Role varchar(20),primary key(Act_id,Mov_id),foreign key(Act_id) references ACTOR(Act_id),foreign key(Mov_id) references MOVIES(Mov_id));
+create table MOVIE_CAST(Act_id varchar(10),Mov_id varchar(10),Role varchar(20),primary key(Act_id,Mov_id),foreign key(Act_id) references ACTOR(Act_id) on delete cascade,foreign key(Mov_id) references MOVIES(Mov_id) on delete cascade);
 
-create table RATING(Rat_id varchar(10),Mov_id varchar(10),Rev_stars int,primary key(Rat_id),foreign key(Mov_id) references MOVIES(Mov_id));
+create table RATING(Rat_id varchar(10),Mov_id varchar(10),Rev_stars int,primary key(Rat_id),foreign key(Mov_id) references MOVIES(Mov_id) on delete cascade);
 
 insert into ACTOR values("A101","Raj","M"),("A102","Johny","M"),("A103","Leo","M"),("A104","Saru","F"),("A105","Jasmine","F"),("A106","Anthony Perkins","M"),("A107","Harrison Ford","M");
 
